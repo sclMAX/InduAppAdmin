@@ -29,15 +29,7 @@ export class UsuariosPage {
         }, err => {
           console.error.bind(err);
         }, () => {
-          load.dismiss().then(() => {
-            let t = this.toast.create({
-              position: 'middle',
-              message: 'Carga finalizada ',
-              showCloseButton: true,
-              closeButtonText: 'Aceptar',
-            });
-            t.present();
-          })
+          load.dismiss();
         });
       });
     });

@@ -9,6 +9,7 @@ let apiUrl: string = 'http://www.indumatics.com.ar/api/usuarios/';
 
 export class Usuario {
   id: number = 0;
+  idLocal:number = 0;
   razonSocial: string;
   nombre: string;
   telefono: string;

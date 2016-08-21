@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform, LoadingController } from 'ionic-angular';
-import {Pedidos, PedidoServer} from '../../../providers/pedidos/pedidos';
+import {Pedidos, Pedido} from '../../../providers/pedidos/pedidos';
 import {Usuario} from '../../../providers/usuarios/usuarios';
+import {Color} from '../../../providers/colores/colores';
 
 
 @Component({
@@ -9,8 +10,8 @@ import {Usuario} from '../../../providers/usuarios/usuarios';
   providers: [Pedidos],
 })
 export class UsuarioPedidosPage {
-  pedidos: Array<PedidoServer>;
-  private usuario: Usuario;
+  pedidos: Array<Pedido>;
+  usuario: Usuario;
 
   constructor(private navCtrl: NavController, private parametros: NavParams, private pedidosP: Pedidos,
     private platform: Platform, private loading: LoadingController) {

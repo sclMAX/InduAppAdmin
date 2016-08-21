@@ -3,29 +3,32 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import * as ResponseClass from '../clases/response';
 import {Observable} from 'rxjs';
+import {Usuario} from '../usuarios/usuarios';
+import {Color} from '../colores/colores';
+import {Perfil} from '../perfiles/perfiles';
 
 let apiUrl: string = 'http://www.indumatics.com.ar/api/pedidos/';
 
-export class PedidoServer {
+export class Pedido {
   id: number;
-  idUsuario: number;
-  isPedido: boolean;
+  usuario: Usuario;
+  isPedido: boolean = false;
   fecha: Date;
   comentarios: string;
-  isEnviado: boolean;
-  isProcesado: boolean;
-  detalle: Array<ItemServer>;
+  isEnviado: boolean = false;
+  isProcesado: boolean = false;
+  detalle: Array<Item>;
   constructor() {
-    this.detalle = new Array<ItemServer>();
+    this.detalle = new Array<Item>();
   }
 }
 
-export class ItemServer {
+export class Item {
   id: number;
   idPedido: number;
   cantidad: number;
-  idPerfil: string;
-  idColor: number;
+  perfil: Perfil;
+  color: Color;
   comentario: string;
 }
 
@@ -40,11 +43,11 @@ export class Pedidos {
     return this.http.get(url, options).map(res => res.json());
   }
 
-  public getPorUsuario(idUsuario: number): Observable<Array<PedidoServer>> {
+  public getPorUsuario(idUsuario: number): Observable<Array<Pedido>> {
     return Observable.create(obs => {
       this.serverUsuarioGetPedidos(idUsuario).subscribe(res => {
         if (res.response) {
-          let pedidos = <Array<PedidoServer>>JSON.parse(JSON.stringify(res.result));
+          let pedidos = <Array<Pedido>>JSON.parse(JSON.stringify(res.result));
           obs.next(pedidos);
           obs.complete();
         } else {

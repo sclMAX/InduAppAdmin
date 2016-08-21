@@ -1,15 +1,29 @@
 <ion-header>
   <ion-navbar primary>
-    <ion-title>usuario-pedidos</ion-title>
+    <ion-title> Pedidos del Cliente:{{usuario.nombre}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let pedido of pedidos">
-      {{pedido.id}}
-      <ion-list>
-        <ion-item *ngFor="let item of pedido.detalle">
-          {{item.idPerfil}} - {{item.color}}
+    <ion-item *ngFor="let pedido of pedidos" >
+      {{pedido.id}} - {{pedido.fecha |date}} - {{pedido.comentarios}}
+      <ion-list *ngIf="(pedido.isProcesado >0)">
+        <ion-item>
+          <table >
+            <thead>
+              <th> Cantidad </th>
+              <th> Codigo </th>
+              <th> Color </th>
+              <th> Comentarios </th>
+            </thead>
+            <tr *ngFor="let item of pedido.detalle">
+              <td>{{item.cantidad}}</td>
+              <td>{{item.perfil.idPerfil}}</td>
+              <td>{{item.color.color}}</td>
+              <td>{{item.comentario}}</td>
+              <td>{{(pedido.isProcesado)}}</td>
+            </tr>
+          </table>
         </ion-item>
       </ion-list>
     </ion-item>
