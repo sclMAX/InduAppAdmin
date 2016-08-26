@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-item-group text-wrap>
+    <ion-item-divider light>CLIENTE</ion-item-divider>
+    <ion-item>
+      <ion-grid>
+        <ion-row wrap>
+          <ion-col width-50>
+            <ion-icon name="phone-portrait" item-left></ion-icon>App ID: {{pedido.usuario.id}}<br>
+            <ion-icon name="home" item-left></ion-icon>Razon Social: {{pedido.usuario.razonSocial}}<br>
+            <ion-icon name="call" item-left></ion-icon>Telefono: {{pedido.usuario.telefono}}<br>
+          </ion-col>
+          <ion-col width-50>
+            <ion-icon name="pricetag" item-left></ion-icon>Local ID: {{pedido.usuario.idLocal}}<br>
+            <ion-icon name="person" item-left></ion-icon>Nombre: {{pedido.usuario.nombre}}<br>
+            <ion-icon name="mail" item-left></ion-icon>E-Mail: <a href="mailto:{{pedido.usuario.email}}">{{pedido.usuario.email}}</a><br>
+          </ion-col>
+        </ion-row>
+        <ion-row wrap>
+          <ion-col>
+            <ion-icon name="pin" item-left></ion-icon>Direccion: {{pedido.usuario.direccion}} - {{pedido.usuario.localidad}} - {{pedido.usuario.provincia}}
+            - {{pedido.usuario.pais}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group text-wrap>
+    <ion-item-divider light *ngIf="pedido.comentarios !=''">COMENTARIOS</ion-item-divider>
+    <ion-item text-wrap>
+      <p>{{pedido.comentarios}}</p>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group text-wrap>
+    <ion-item-divider light>
+      <span *ngIf="pedido.isPedido > 0" secondary>PEDIDO DETALLE</span>
+      <span *ngIf="pedido.isPedido == 0" danger>PRESUPUESTO DETALLE</span>
+      <ion-grid>
+        <ion-row wrap>
+          <ion-col width="10">CANTIDAD</ion-col>
+          <ion-col width="20">PERFIL</ion-col>
+          <ion-col width="10">LARGO</ion-col>
+          <ion-col width="30">COLOR</ion-col>
+          <ion-col width="30">COMENTARIOS</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item-divider>
+    <ion-item>
+      <ion-grid>
+        <ion-row *ngFor="let item of pedido.detalle" wrap>
+          <ion-col width="10">{{item.cantidad}}</ion-col>
+          <ion-col width="20">{{item.perfil.idPerfil}}</ion-col>
+          <ion-col width="10">{{item.perfil.largo}}</ion-col>
+          <ion-col width="30">{{item.color.color}}</ion-col>
+          <ion-col width="30">{{item.comentario}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-item-group>
+</ion-content>

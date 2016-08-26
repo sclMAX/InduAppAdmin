@@ -5,6 +5,7 @@
 </ion-header>
 <ion-content padding>
   <ion-list>
+    <ion-list-header>Usuasrios: {{usuarios.length}}</ion-list-header>
     <ion-item tappable *ngFor="let usuario of usuarios" (click)="goPedidos(usuario)">
       {{usuario.id}} - {{usuario.razonSocial}} - {{usuario.nombre}} - {{usuario.email}}
     </ion-item>

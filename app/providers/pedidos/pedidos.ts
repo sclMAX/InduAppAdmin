@@ -43,6 +43,48 @@ export class Pedidos {
     return this.http.get(url, options).map(res => res.json());
   }
 
+  private serverGetAll(): Observable<ResponseClass.Response> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    let url: string = apiUrl + '?apikey=30708166614';
+    return this.http.get(url, options).map(res => res.json());
+  }
+
+  private serverGetProcesados(isProcesado: boolean = false): Observable<ResponseClass.Response> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    let url: string = apiUrl + '?isProcesado=' + isProcesado + '&apikey=30708166614';
+    return this.http.get(url, options).map(res => res.json());
+  }
+
+  public getAll(): Observable<Array<Pedido>> {
+    return Observable.create(obs => {
+      this.serverGetAll().subscribe(res => {
+        if (res.response) {
+          let pedidos = <Array<Pedido>>JSON.parse(JSON.stringify(res.result));
+          obs.next(pedidos);
+          obs.complete();
+        } else {
+          obs.error(res);
+        }
+      })
+    });
+  }
+
+  public getAllProcesados(isProcesado: boolean = false): Observable<Array<Pedido>> {
+    return Observable.create(obs => {
+      this.serverGetProcesados(isProcesado).subscribe(res => {
+        if (res.response) {
+          let pedidos = <Array<Pedido>>JSON.parse(JSON.stringify(res.result));
+          obs.next(pedidos);
+          obs.complete();
+        } else {
+          obs.error(res);
+        }
+      });
+    });
+  }
+
   public getPorUsuario(idUsuario: number): Observable<Array<Pedido>> {
     return Observable.create(obs => {
       this.serverUsuarioGetPedidos(idUsuario).subscribe(res => {

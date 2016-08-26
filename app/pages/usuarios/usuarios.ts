@@ -14,6 +14,7 @@ export class UsuariosPage {
   constructor(private navCtrl: NavController, private usuariosP: Usuarios, private platform: Platform,
     private loading: LoadingController, private toast: ToastController) {
     this.title = "Listado de Usuarios";
+    this.usuarios = new Array<Usuario>();
   }
 
   goPedidos(usuario: Usuario) {

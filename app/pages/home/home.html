@@ -1,11 +1,20 @@
 <ion-header>
   <ion-navbar primary>
     <ion-title>
-     {{title}}
+      {{title}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <button round secondary (click)="goUsuariosList()">Usuarios</button>
+  <button round secondary (click)="updatePedidosList()">Actualizar</button>
+  <ion-item-group>
+    <ion-item-divider light>CLIENTES - Pedidos sin Procesar </ion-item-divider>
+    <ion-item tappable *ngFor="let pedido of pedidosNuevos" (click)="goPedido(pedido)">
+      <span *ngIf="pedido.isPedido >0" primary> {{pedido.id}} - {{pedido.usuario.id}} - {{pedido.usuario.nombre}}</span>
+      <span *ngIf="pedido.isPedido ==0" ligth> {{pedido.id}} - {{pedido.usuario.id}} - {{pedido.usuario.nombre}}</span>
+      <ion-icon name="more" item-right></ion-icon>
+    </ion-item>
+  </ion-item-group>
 </ion-content>
